@@ -1,4 +1,8 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Lexicon_MVC_Storage_11.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<Lexicon_MVC_Storage_11Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Lexicon_MVC_Storage_11Context") ?? throw new InvalidOperationException("Connection string 'Lexicon_MVC_Storage_11Context' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
