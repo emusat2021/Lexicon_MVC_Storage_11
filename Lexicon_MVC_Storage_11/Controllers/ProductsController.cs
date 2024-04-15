@@ -38,6 +38,19 @@ namespace Lexicon_MVC_Storage_11.Controllers
             return View("TotalProducts", productViewModels.ToList());
         }
 
+        public async Task<IActionResult> Search(string searchField)
+        {
+            var result = _context.Product.Where(x => x.Name.Contains(searchField)).Select(e => new ProductViewModel
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Price= e.Price,
+                Count = e.Count,
+                InventoryValue= e.Price * e.Count
+            });
+            return View("TotalProducts", await result.ToListAsync());
+        }
+
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
