@@ -11,5 +11,6 @@ namespace Lexicon_MVC_Storage_11.Data
         }
 
         public DbSet<Product> Product { get; set; } = default!;
+        //public DbSet<Lexicon_MVC_Storage_11.Models.ProductViewModel> ProductViewModel { get; set; } = default!;
     }
 }

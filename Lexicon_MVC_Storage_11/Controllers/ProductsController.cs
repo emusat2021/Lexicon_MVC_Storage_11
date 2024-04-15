@@ -14,10 +14,28 @@ namespace Lexicon_MVC_Storage_11.Controllers
             _context = context;
         }
 
-        // GET: Products
+        ////GET: Products
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.Product.ToListAsync());
+        //}
+
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+           // var productViewModels = new List<ProductViewModel>();
+            var products = await _context.Product.ToListAsync();
+
+            var productViewModels = products.Select(p => new ProductViewModel
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Count = p.Count,
+                InventoryValue = p.Price * p.Count
+            });
+
+
+            return View("TotalProducts", productViewModels.ToList());
         }
 
         // GET: Products/Details/5
